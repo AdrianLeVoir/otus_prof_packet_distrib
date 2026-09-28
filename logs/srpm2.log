@@ -1,0 +1,44 @@
+Script started on 2026-09-28 03:52:09+03:00 [COMMAND="bash /tmp/iris_srpm2.sh" <not executed on terminal>]
++ cd /root
++ rpm -Uvh /home/adrianl/nginx-1.26.3-6.el10_2.7.src.rpm
+Обновление / установка...
+   1:nginx-2:1.26.3-6.el10_2.7                                          (  2%)#                                 (  4%)##                                (  9%)###                               ( 10%)####                              ( 15%)#####                             ( 17%)######                            ( 19%)#######                           ( 24%)########                          ( 26%)#########                         ( 28%)##########                        ( 33%)###########                       ( 35%)############                      ( 37%)#############                     ( 42%)##############                    ( 44%)###############                   ( 46%)################                  ( 51%)#################                 ( 53%)##################                ( 55%)###################               ( 59%)####################              ( 62%)#####################             ( 64%)######################            ( 68%)#######################           ( 71%)########################          ( 73%)#########################         ( 75%)##########################        ( 80%)###########################       ( 82%)############################      ( 84%)#############################     ( 88%)##############################    ( 91%)###############################   ( 93%)################################  ( 96%)################################# ( 99%)################################# [100%]
++ ls -l /root/rpmbuild/SPECS/ /root/rpmbuild/SOURCES/
++ head -20
+/root/rpmbuild/SOURCES/:
+итого 1500
+-rw-r--r--. 1 root root     812 сен  8 03:00 0001-remove-Werror-in-upstream-build-scripts.patch
+-rw-r--r--. 1 root root    3123 сен  8 03:00 0002-fix-PIDFile-handling.patch
+-rw-r--r--. 1 root root   27853 сен  8 03:00 0003-Add-SSL-passphrase-dialog.patch
+-rw-r--r--. 1 root root    2885 сен  8 03:00 0004-Disable-ENGINE-support.patch
+-rw-r--r--. 1 root root     760 сен  8 03:00 0005-Compile-perl-module-with-O2.patch
+-rw-r--r--. 1 root root     995 сен  8 03:00 0006-Clarify-binding-behavior-of-t-option.patch
+-rw-r--r--. 1 root root    1710 сен  8 03:00 0007-Upstream-detect-premature-plain-text-response-from-S.patch
+-rw-r--r--. 1 root root    1169 сен  8 03:00 0008-Dav-destination-length-validation-for-COPY-and-MOVE.patch
+-rw-r--r--. 1 root root    4211 сен  8 03:00 0009-Mp4-fixed-possible-integer-overflow-on-32-bit-platfo.patch
+-rw-r--r--. 1 root root    1224 сен  8 03:00 0010-Mail-fixed-clearing-s-passwd-in-auth-http-requests.patch
+-rw-r--r--. 1 root root    2967 сен  8 03:00 0011-Mp4-avoid-zero-size-buffers-in-output.patch
+-rw-r--r--. 1 root root    1299 сен  8 03:00 0012-Rewrite-fixed-escaping-and-possible-buffer-overrun.patch
+-rw-r--r--. 1 root root    2543 сен  8 03:00 0013-Rewrite-fix-buffer-overflow-with-overlapping-capture.patch
+-rw-r--r--. 1 root root   11672 сен  8 03:00 0014-Added-max_headers-directive.patch
+-rw-r--r--. 1 root root    3583 сен  8 03:00 0015-Upstream-limit-header-length-for-HTTP-2-and-gRPC.patch
+-rw-r--r--. 1 root root    2468 сен  8 03:00 0016-Avoid-duplicate-subrequest-finalization.patch
+-rw-r--r--. 1 root root    1571 сен  8 03:00 0017-Fixed-uninitialized-memory-read-caused-by-stale-rege.patch
+-rw-r--r--. 1 root root   60306 сен  8 03:00 0018-Script-access-log-buffer-overrun-protection-ABI-safe.patch
++ echo '=== builddep ==='
+=== builddep ===
++ dnf builddep -y /root/rpmbuild/SPECS/nginx.spec
++ tail -10
+  pixman-devel-0.43.4-2.el10.x86_64                                             
+  python3-pyparsing-3.1.1-7.el10.noarch                                         
+  sysprof-capture-devel-47.2-1.el10.x86_64                                      
+  systemtap-sdt-devel-5.4-3.el10.x86_64                                         
+  systemtap-sdt-dtrace-5.4-3.el10.x86_64                                        
+  xorg-x11-proto-devel-2024.1-3.el10.noarch                                     
+  xz-devel-1:5.6.2-4.el10_0.x86_64                                              
+  zlib-ng-compat-devel-2.2.3-3.el10_1.x86_64                                    
+
+Выполнено!
++ set +x
+
+Script done on 2026-09-28 03:53:13+03:00 [COMMAND_EXIT_CODE="0"]

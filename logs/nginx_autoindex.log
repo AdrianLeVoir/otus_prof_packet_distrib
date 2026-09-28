@@ -1,0 +1,41 @@
+Script started on 2026-09-28 03:55:34+03:00 [COMMAND="bash /tmp/fix_autoindex.sh" <not executed on terminal>]
++ sed -i '/root         \/usr\/share\/nginx\/html;/a\        autoindex on;' /etc/nginx/nginx.conf
++ grep -n autoindex /etc/nginx/nginx.conf
+42:        autoindex on;
+56:        autoindex on;
++ nginx -t
+nginx: the configuration file /etc/nginx/nginx.conf syntax is ok
+nginx: configuration file /etc/nginx/nginx.conf test is successful
++ nginx -s reload
++ sleep 1
++ echo '=== curl repo ==='
+=== curl repo ===
++ curl -s http://localhost/repo/
++ head -25
+<html>
+<head><title>Index of /repo/</title></head>
+<body>
+<h1>Index of /repo/</h1><hr><pre><a href="../">../</a>
+<a href="repodata/">repodata/</a>                                          28-Sep-2026 00:55                   -
+<a href="nginx-1.26.3-6.el10.7.x86_64.rpm">nginx-1.26.3-6.el10.7.x86_64.rpm</a>                   28-Sep-2026 00:55               32816
+<a href="nginx-all-modules-1.26.3-6.el10.7.noarch.rpm">nginx-all-modules-1.26.3-6.el10.7.noarch.rpm</a>       28-Sep-2026 00:55                9661
+<a href="nginx-core-1.26.3-6.el10.7.x86_64.rpm">nginx-core-1.26.3-6.el10.7.x86_64.rpm</a>              28-Sep-2026 00:55             1032969
+<a href="nginx-filesystem-1.26.3-6.el10.7.noarch.rpm">nginx-filesystem-1.26.3-6.el10.7.noarch.rpm</a>        28-Sep-2026 00:55               11394
+<a href="nginx-mod-devel-1.26.3-6.el10.7.x86_64.rpm">nginx-mod-devel-1.26.3-6.el10.7.x86_64.rpm</a>         28-Sep-2026 00:55              898514
+<a href="nginx-mod-http-image-filter-1.26.3-6.el10.7.x86_64.rpm">nginx-mod-http-image-filter-1.26.3-6.el10.7.x86..&gt;</a> 28-Sep-2026 00:55               21721
+<a href="nginx-mod-http-perl-1.26.3-6.el10.7.x86_64.rpm">nginx-mod-http-perl-1.26.3-6.el10.7.x86_64.rpm</a>     28-Sep-2026 00:55               33603
+<a href="nginx-mod-http-xslt-filter-1.26.3-6.el10.7.x86_64.rpm">nginx-mod-http-xslt-filter-1.26.3-6.el10.7.x86_..&gt;</a> 28-Sep-2026 00:55               20469
+<a href="nginx-mod-mail-1.26.3-6.el10.7.x86_64.rpm">nginx-mod-mail-1.26.3-6.el10.7.x86_64.rpm</a>          28-Sep-2026 00:55               55700
+<a href="nginx-mod-stream-1.26.3-6.el10.7.x86_64.rpm">nginx-mod-stream-1.26.3-6.el10.7.x86_64.rpm</a>        28-Sep-2026 00:55               90312
+</pre><hr></body>
+</html>
++ echo '=== curl repodata ==='
+=== curl repodata ===
++ curl -sI http://localhost/repo/repodata/repomd.xml
++ head -3
+HTTP/1.1 200 OK
+Server: nginx/1.26.3
+Date: Mon, 28 Sep 2026 00:55:36 GMT
++ set +x
+
+Script done on 2026-09-28 03:55:36+03:00 [COMMAND_EXIT_CODE="0"]

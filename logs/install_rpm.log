@@ -1,0 +1,36 @@
+Script started on 2026-09-28 03:55:04+03:00 [COMMAND="bash /tmp/install_rpm.sh" <not executed on terminal>]
++ cd /root/rpmbuild/RPMS/x86_64
++ cp ../noarch/nginx-all-modules-1.26.3-6.el10.7.noarch.rpm ../noarch/nginx-filesystem-1.26.3-6.el10.7.noarch.rpm .
++ echo '=== install our RPMs ==='
+=== install our RPMs ===
++ dnf -y localinstall nginx-1.26.3-6.el10.7.x86_64.rpm nginx-all-modules-1.26.3-6.el10.7.noarch.rpm nginx-core-1.26.3-6.el10.7.x86_64.rpm nginx-filesystem-1.26.3-6.el10.7.noarch.rpm nginx-mod-devel-1.26.3-6.el10.7.x86_64.rpm nginx-mod-http-image-filter-1.26.3-6.el10.7.x86_64.rpm nginx-mod-http-perl-1.26.3-6.el10.7.x86_64.rpm nginx-mod-http-xslt-filter-1.26.3-6.el10.7.x86_64.rpm nginx-mod-mail-1.26.3-6.el10.7.x86_64.rpm nginx-mod-stream-1.26.3-6.el10.7.x86_64.rpm
++ tail -12
+  nginx-2:1.26.3-6.el10.7.x86_64            nginx-core-2:1.26.3-6.el10.7.x86_64
+  nginx-filesystem-2:1.26.3-6.el10.7.noarch
+Установлен:
+  nginx-all-modules-2:1.26.3-6.el10.7.noarch                                    
+  nginx-mod-devel-2:1.26.3-6.el10.7.x86_64                                      
+  nginx-mod-http-image-filter-2:1.26.3-6.el10.7.x86_64                          
+  nginx-mod-http-perl-2:1.26.3-6.el10.7.x86_64                                  
+  nginx-mod-http-xslt-filter-2:1.26.3-6.el10.7.x86_64                           
+  nginx-mod-mail-2:1.26.3-6.el10.7.x86_64                                       
+  nginx-mod-stream-2:1.26.3-6.el10.7.x86_64                                     
+
+Выполнено!
++ echo '=== nginx version/config ==='
+=== nginx version/config ===
++ nginx -V
++ tr ' ' '\n'
++ grep -iE 'brotli|add-module|nginx version'
++ head
+--add-module=/root/ngx_brotli
++ echo '=== start nginx ==='
+=== start nginx ===
++ systemctl enable --now nginx
+Created symlink '/etc/systemd/system/multi-user.target.wants/nginx.service' → '/usr/lib/systemd/system/nginx.service'.
++ sleep 1
++ systemctl is-active nginx
+active
++ set +x
+
+Script done on 2026-09-28 03:55:09+03:00 [COMMAND_EXIT_CODE="0"]

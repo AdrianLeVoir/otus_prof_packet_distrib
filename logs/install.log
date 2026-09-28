@@ -1,0 +1,44 @@
+Script started on 2026-09-28 03:46:55+03:00 [COMMAND="bash /tmp/iris_install.sh" <not executed on terminal>]
++ echo '===== install build tooling ====='
+===== install build tooling =====
++ dnf install -y rpmdevtools rpm-build createrepo_c yum-utils gcc make wget git cmake nginx
++ tail -8
+  rpm-build-4.19.1.1-23.el10.x86_64                                             
+  rpmdevtools-9.6-9.el10.noarch                                                 
+  rust-toolset-srpm-macros-1.92.0-2.el10_2.noarch                               
+  systemd-rpm-macros-257-23.el10_2.2.rocky.0.1.noarch                           
+  yum-utils-4.7.0-10.el10.noarch                                                
+  zstd-1.5.5-9.el10.x86_64                                                      
+
+Выполнено!
++ echo '=== versions ==='
+=== versions ===
++ rpmbuild --version
+Версия RPM 4.19.1.1
++ createrepo_c --version
++ head -1
+Version: 1.1.2 (Features: LegacyWeakdeps )
++ nginx -v
+nginx version: nginx/1.26.3
++ echo '=== nginx source available? ==='
+=== nginx source available? ===
++ dnf download --source nginx
++ tail -5
+подключение репозитория extras-source
+Rocky Linux 10 - BaseOS - Source                 97 kB/s | 194 kB     00:02    
+Rocky Linux 10 - AppStream - Source             347 kB/s | 564 kB     00:01    
+Rocky Linux 10 - Extras Source                  4.6 kB/s | 5.5 kB     00:01    
+nginx-1.26.3-6.el10_2.7.src.rpm                 820 kB/s | 1.3 MB     00:01    
++ ls -l nginx-1.26.3-6.el10_2.7.src.rpm
+-rw-r--r--. 1 root root 1369436 сен 28 03:49 nginx-1.26.3-6.el10_2.7.src.rpm
++ echo '=== enabled repos ==='
+=== enabled repos ===
++ dnf repolist
++ tail -15
+идентификатор репозитория               имя репозитория
+appstream                               Rocky Linux 10 - AppStream
+baseos                                  Rocky Linux 10 - BaseOS
+extras                                  Rocky Linux 10 - Extras
++ set +x
+
+Script done on 2026-09-28 03:49:32+03:00 [COMMAND_EXIT_CODE="0"]

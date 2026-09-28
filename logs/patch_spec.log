@@ -1,0 +1,31 @@
+Script started on 2026-09-28 03:53:57+03:00 [COMMAND="bash /tmp/patch_spec.sh" <not executed on terminal>]
++ echo '=== build brotli ==='
+=== build brotli ===
++ cd /root/ngx_brotli/deps/brotli
++ mkdir -p out
++ cd out
++ cmake -DCMAKE_BUILD_TYPE=Release -DBUILD_SHARED_LIBS=OFF -DCMAKE_INSTALL_PREFIX=./installed ..
++ tail -3
+-- Configuring done (0.5s)
+-- Generating done (0.0s)
+-- Build files have been written to: /root/ngx_brotli/deps/brotli/out
++ cmake --build . --config Release -j 2 --target brotlienc
++ tail -5
+[ 89%] Building C object CMakeFiles/brotlienc.dir/c/enc/metablock.c.o
+[ 93%] Building C object CMakeFiles/brotlienc.dir/c/enc/static_dict.c.o
+[ 96%] Building C object CMakeFiles/brotlienc.dir/c/enc/utf8_util.c.o
+[100%] Linking C static library libbrotlienc.a
+[100%] Built target brotlienc
++ echo '=== patch spec ==='
+=== patch spec ===
++ S=/root/rpmbuild/SPECS/nginx.spec
++ cp /root/rpmbuild/SPECS/nginx.spec /root/rpmbuild/SPECS/nginx.spec.orig
++ awk '{ if ($0 ~ /--with-cc-opt/) print "    --add-module=/root/ngx_brotli \\"; print }' /root/rpmbuild/SPECS/nginx.spec
++ mv /root/rpmbuild/SPECS/nginx.spec.new /root/rpmbuild/SPECS/nginx.spec
++ grep -n 'add-module\|with-cc-opt\|with-threads' /root/rpmbuild/SPECS/nginx.spec
+428:    --with-threads \
+429:    --add-module=/root/ngx_brotli \
+430:    --with-cc-opt="%{optflags} $(pcre2-config --cflags)" \
++ set +x
+
+Script done on 2026-09-28 03:54:09+03:00 [COMMAND_EXIT_CODE="0"]

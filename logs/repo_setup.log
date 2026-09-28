@@ -1,0 +1,47 @@
+Script started on 2026-09-28 03:55:21+03:00 [COMMAND="bash /tmp/repo_setup.sh" <not executed on terminal>]
++ echo '===== create repo dir ====='
+===== create repo dir =====
++ mkdir -p /usr/share/nginx/html/repo
++ cp /root/rpmbuild/RPMS/x86_64/nginx-1.26.3-6.el10.7.x86_64.rpm /root/rpmbuild/RPMS/x86_64/nginx-all-modules-1.26.3-6.el10.7.noarch.rpm /root/rpmbuild/RPMS/x86_64/nginx-core-1.26.3-6.el10.7.x86_64.rpm /root/rpmbuild/RPMS/x86_64/nginx-filesystem-1.26.3-6.el10.7.noarch.rpm /root/rpmbuild/RPMS/x86_64/nginx-mod-devel-1.26.3-6.el10.7.x86_64.rpm /root/rpmbuild/RPMS/x86_64/nginx-mod-http-image-filter-1.26.3-6.el10.7.x86_64.rpm /root/rpmbuild/RPMS/x86_64/nginx-mod-http-perl-1.26.3-6.el10.7.x86_64.rpm /root/rpmbuild/RPMS/x86_64/nginx-mod-http-xslt-filter-1.26.3-6.el10.7.x86_64.rpm /root/rpmbuild/RPMS/x86_64/nginx-mod-mail-1.26.3-6.el10.7.x86_64.rpm /root/rpmbuild/RPMS/x86_64/nginx-mod-stream-1.26.3-6.el10.7.x86_64.rpm /usr/share/nginx/html/repo/
++ ls -l /usr/share/nginx/html/repo/
+итого 2180
+-rw-r--r--. 1 root root   32816 сен 28 03:55 nginx-1.26.3-6.el10.7.x86_64.rpm
+-rw-r--r--. 1 root root    9661 сен 28 03:55 nginx-all-modules-1.26.3-6.el10.7.noarch.rpm
+-rw-r--r--. 1 root root 1032969 сен 28 03:55 nginx-core-1.26.3-6.el10.7.x86_64.rpm
+-rw-r--r--. 1 root root   11394 сен 28 03:55 nginx-filesystem-1.26.3-6.el10.7.noarch.rpm
+-rw-r--r--. 1 root root  898514 сен 28 03:55 nginx-mod-devel-1.26.3-6.el10.7.x86_64.rpm
+-rw-r--r--. 1 root root   21721 сен 28 03:55 nginx-mod-http-image-filter-1.26.3-6.el10.7.x86_64.rpm
+-rw-r--r--. 1 root root   33603 сен 28 03:55 nginx-mod-http-perl-1.26.3-6.el10.7.x86_64.rpm
+-rw-r--r--. 1 root root   20469 сен 28 03:55 nginx-mod-http-xslt-filter-1.26.3-6.el10.7.x86_64.rpm
+-rw-r--r--. 1 root root   55700 сен 28 03:55 nginx-mod-mail-1.26.3-6.el10.7.x86_64.rpm
+-rw-r--r--. 1 root root   90312 сен 28 03:55 nginx-mod-stream-1.26.3-6.el10.7.x86_64.rpm
++ echo '===== createrepo_c ====='
+===== createrepo_c =====
++ createrepo_c /usr/share/nginx/html/repo/
+Directory walk started
+Directory walk done - 10 packages
+Temporary output repo path: /usr/share/nginx/html/repo/.repodata/
+Pool started (with 5 workers)
+Pool finished
++ echo '===== enable autoindex ====='
+===== enable autoindex =====
++ sed -i '/location \/ {/a\            autoindex on;' /etc/nginx/nginx.conf
++ grep -n autoindex /etc/nginx/nginx.conf
++ nginx -t
+nginx: the configuration file /etc/nginx/nginx.conf syntax is ok
+nginx: configuration file /etc/nginx/nginx.conf test is successful
++ nginx -s reload
++ echo '===== curl repo ====='
+===== curl repo =====
++ curl -s http://localhost/repo/
++ head -20
+<html>
+<head><title>403 Forbidden</title></head>
+<body>
+<center><h1>403 Forbidden</h1></center>
+<hr><center>nginx/1.26.3</center>
+</body>
+</html>
++ set +x
+
+Script done on 2026-09-28 03:55:21+03:00 [COMMAND_EXIT_CODE="0"]

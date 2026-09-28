@@ -1,0 +1,47 @@
+Script started on 2026-09-28 03:57:02+03:00 [COMMAND="bash /tmp/repo_proof.sh" <not executed on terminal>]
++ echo '===== packages in otus repo ====='
+===== packages in otus repo =====
++ dnf repoquery --repo=otus -a
++ sort
+nginx-2:1.26.3-6.el10.7.x86_64
+nginx-all-modules-2:1.26.3-6.el10.7.noarch
+nginx-core-2:1.26.3-6.el10.7.x86_64
+nginx-filesystem-2:1.26.3-6.el10.7.noarch
+nginx-mod-devel-2:1.26.3-6.el10.7.x86_64
+nginx-mod-http-image-filter-2:1.26.3-6.el10.7.x86_64
+nginx-mod-http-perl-2:1.26.3-6.el10.7.x86_64
+nginx-mod-http-xslt-filter-2:1.26.3-6.el10.7.x86_64
+nginx-mod-mail-2:1.26.3-6.el10.7.x86_64
+nginx-mod-stream-2:1.26.3-6.el10.7.x86_64
+percona-release-0:1.0-34.noarch
++ echo '===== install percona-release from our repo ====='
+===== install percona-release from our repo =====
++ dnf -y install percona-release.noarch
++ tail -6
+
+
+Установлен:
+  percona-release-1.0-34.noarch                                                 
+
+Выполнено!
++ echo '===== reinstall nginx-core from our repo (proof) ====='
+===== reinstall nginx-core from our repo (proof) =====
++ dnf -y '--disablerepo=*' --enablerepo=otus reinstall nginx-core
++ tail -6
+  Запуск скриптлета: nginx-core-2:1.26.3-6.el10.7.x86_64                    2/2 
+
+Переустановлен:
+  nginx-core-2:1.26.3-6.el10.7.x86_64                                           
+
+Выполнено!
++ echo '===== nginx still ok ====='
+===== nginx still ok =====
++ systemctl is-active nginx
+active
++ nginx -V
++ tr ' ' '\n'
++ grep -i add-module
+--add-module=/root/ngx_brotli
++ set +x
+
+Script done on 2026-09-28 03:57:08+03:00 [COMMAND_EXIT_CODE="0"]

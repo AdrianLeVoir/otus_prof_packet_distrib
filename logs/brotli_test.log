@@ -1,0 +1,26 @@
+Script started on 2026-09-28 03:57:21+03:00 [COMMAND="bash /tmp/brotli_test.sh" <not executed on terminal>]
++ grep -q 'brotli on' /etc/nginx/nginx.conf
++ sed -i '/types_hash_max_size 4096;/a\    brotli on;\n    brotli_comp_level 6;\n    brotli_types text/plain text/css text/xml application/javascript application/json;' /etc/nginx/nginx.conf
++ grep -n brotli /etc/nginx/nginx.conf
+28:    brotli on;
+29:    brotli_comp_level 6;
+30:    brotli_types text/plain text/css text/xml application/javascript application/json;
++ nginx -t
+nginx: the configuration file /etc/nginx/nginx.conf syntax is ok
+nginx: configuration file /etc/nginx/nginx.conf test is successful
++ nginx -s reload
++ sleep 1
++ echo '=== brotli response header ==='
+=== brotli response header ===
++ curl -sI -H 'Accept-Encoding: br' http://localhost/
++ grep -iE 'content-encoding|HTTP'
+HTTP/1.1 200 OK
+Content-Encoding: br
++ echo '=== gzip fallback ==='
+=== gzip fallback ===
++ curl -sI -H 'Accept-Encoding: gzip' http://localhost/
++ grep -iE 'content-encoding|HTTP'
+HTTP/1.1 200 OK
++ set +x
+
+Script done on 2026-09-28 03:57:22+03:00 [COMMAND_EXIT_CODE="0"]

@@ -1,0 +1,49 @@
+Script started on 2026-09-28 03:55:43+03:00 [COMMAND="bash /tmp/repo_use.sh" <not executed on terminal>]
++ echo '===== add otus repo ====='
+===== add otus repo =====
++ cat
++ cat /etc/yum.repos.d/otus.repo
+[otus]
+name=otus-linux
+baseurl=http://localhost/repo
+gpgcheck=0
+enabled=1
++ echo '===== repolist ====='
+===== repolist =====
++ dnf repolist enabled
++ grep -i otus
+otus                                    otus-linux
++ echo '===== list from our repo only ====='
+===== list from our repo only =====
++ dnf '--disablerepo=*' --enablerepo=otus list available
++ tail -20
+otus-linux                                       45 kB/s | 2.7 kB     00:00    
+Последняя проверка окончания срока действия метаданных: 0:00:01 назад, Пн 28 сен 2026 03:55:43.
++ echo '===== makecache ====='
+===== makecache =====
++ dnf makecache
++ tail -3
+Rocky Linux 10 - AppStream                      1.1 MB/s | 2.7 MB     00:02    
+Rocky Linux 10 - Extras                         3.1 kB/s | 3.1 kB     00:01    
+Создан кэш метаданных.
++ echo '===== add percona-release rpm to repo (as in method) ====='
+===== add percona-release rpm to repo (as in method) =====
++ cd /usr/share/nginx/html/repo
++ wget -q https://repo.percona.com/yum/percona-release-latest.noarch.rpm
++ echo 'percona downloaded'
+percona downloaded
++ createrepo_c /usr/share/nginx/html/repo/
++ tail -2
+Pool started (with 5 workers)
+Pool finished
++ dnf makecache
++ tail -2
+Rocky Linux 10 - Extras                         4.6 kB/s | 3.1 kB     00:00    
+Создан кэш метаданных.
++ dnf list
++ grep -i otus
++ head
+percona-release.noarch                                 1.0-34                             otus         
++ set +x
+
+Script done on 2026-09-28 03:56:50+03:00 [COMMAND_EXIT_CODE="0"]

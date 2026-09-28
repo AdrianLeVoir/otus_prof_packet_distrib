@@ -1,0 +1,41 @@
+Script started on 2026-09-28 03:49:44+03:00 [COMMAND="bash /tmp/iris_srpm.sh" <not executed on terminal>]
++ cd /root
++ rpm -Uvh 'nginx-*.src.rpm'
+ошибка: невозможно открыть nginx-*.src.rpm: Нет такого файла или каталога
++ echo '=== spec present ==='
+=== spec present ===
++ ls -l /root/rpmbuild/SPECS/
+ls: невозможно получить доступ к '/root/rpmbuild/SPECS/': Нет такого файла или каталога
++ echo '=== install build deps ==='
+=== install build deps ===
++ dnf builddep -y /root/rpmbuild/SPECS/nginx.spec
++ tail -12
+Последняя проверка окончания срока действия метаданных: 0:03:30 назад, Пн 28 сен 2026 03:46:14.
+RPM: ошибка: Невозможно открыть /root/rpmbuild/SPECS/nginx.spec: Нет такого файла или каталога
+Ошибка открытия файла: «/root/rpmbuild/SPECS/nginx.spec», неправильный spec-файл: can't parse specfile
+
+Ошибка: Некоторые пакеты не удалось найти.
++ echo '=== clone ngx_brotli ==='
+=== clone ngx_brotli ===
++ rm -rf /root/ngx_brotli
++ git clone --recurse-submodules -j8 https://github.com/google/ngx_brotli
++ tail -5
+Клонирование в «ngx_brotli»...
+Подмодуль «deps/brotli» (https://github.com/google/brotli.git) зарегистрирован по пути «deps/brotli»
+Клонирование в «/root/ngx_brotli/deps/brotli»...
+Submodule path 'deps/brotli': checked out 'ed738e842d2fbdf2d6459e39267a633c4a9b2f5d'
++ ls /root/ngx_brotli/deps/brotli
++ head
+BUILD.bazel
+c
+CHANGELOG.md
+CMakeLists.txt
+compiler_config_setting.bzl
+CONTRIBUTING.md
+csharp
+docs
+fetch-spec
+go
++ set +x
+
+Script done on 2026-09-28 03:51:46+03:00 [COMMAND_EXIT_CODE="0"]
